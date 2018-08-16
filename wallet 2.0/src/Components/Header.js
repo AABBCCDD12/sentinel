@@ -3,11 +3,12 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import {
     Switch, Snackbar, Tooltip, IconButton, Paper, ClickAwayListener, Popper,
-    MenuList, MenuItem, Grow
+    MenuList, MenuItem, Grow, Button
 } from '@material-ui/core';
 import CopyIcon from '@material-ui/icons/FileCopyOutlined';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import { headerStyles } from '../Assets/header.styles';
+import { sidebarStyles } from '../Assets/sidebar.styles';
 import { setTestNet, getETHBalance, getSentBalance } from '../Actions/header.action';
 import { setCurrentTab } from './../Actions/sidebar.action';
 import { connect } from 'react-redux';
@@ -29,11 +30,14 @@ class Header extends Component {
     };
 
     handleMenuClose = (event) => {
+        if (this.anchorEl.contains(event.target)) {
+            return;
+        }
         this.setState({ openAccountMenu: false })
     }
 
     handleMenuToggle = () => {
-        this.setState(state => ({ openAccountMenu: !state.openAccountMenu }));
+        this.setState({ openAccountMenu: !this.state.openAccountMenu });
     };
 
     testNetChange = () => event => {
@@ -113,16 +117,19 @@ class Header extends Component {
                             </div>
                         </Col>
                         <Col xs={1} style={headerStyles.alignRight}>
-                            <IconButton
-                                style={{ outline: 'none' }}
-                                aria-label="Account"
+                            <Button
+                                buttonRef={node => {
+                                    this.anchorEl = node;
+                                }}
+                                style={sidebarStyles.outlineNone}
                                 aria-owns={this.state.openAccountMenu ? 'menu-list-grow' : null}
                                 aria-haspopup="true"
                                 onClick={this.handleMenuToggle}
                             >
                                 <AccountIcon style={headerStyles.accountIconColor} />
-                            </IconButton>
-                            <Popper open={this.state.openAccountMenu} transition disablePortal>
+                            </Button>
+                            <Popper open={this.state.openAccountMenu} anchorEl={this.anchorEl}
+                                style={headerStyles.accountMenuStyle} transition disablePortal>
                                 {({ TransitionProps, placement }) => (
                                     <Grow
                                         {...TransitionProps}

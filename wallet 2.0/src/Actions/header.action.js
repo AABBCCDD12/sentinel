@@ -26,7 +26,7 @@ export async function getETHBalance(address, isTest) {
     } else {
         return {
             type: types.GET_ETH_BAL_PROGRESS,
-            payload: 'Loading'
+            payload: 'Loading...'
         }
     }
 }
@@ -48,7 +48,7 @@ export async function getSentBalance(address, isTest) {
     } else {
         return {
             type: types.GET_SENT_BAL_PROGRESS,
-            payload: 'Loading'
+            payload: 'Loading...'
         }
     }
 }

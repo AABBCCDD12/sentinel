@@ -15,6 +15,12 @@ const headerStyles = {
         height: 50,
         marginLeft: 10
     },
+    accountMenuStyle: {
+        position: 'absolute',
+        zIndex: 1,
+        marginLeft: -75,
+        marginTop: 20
+    },
     clipBoard: {
         height: 18,
         width: 15,
@@ -79,11 +85,11 @@ const headerStyles = {
     thumbTrackStyle: {
         backgroundColor: '#4b4e5d'
     },
-    alignRight:{
-        textAlign:'right'
+    alignRight: {
+        textAlign: 'right'
     },
-    accountIconColor:{
-        color:'#ddd'
+    accountIconColor: {
+        color: '#ddd'
     }
 }
 
